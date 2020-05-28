@@ -1,0 +1,85 @@
+{%  extends 'base.html'  %}
+{% load static %}
+{%  block header  %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1><span class="glyphicon glyphicon-list alt" aria-hidden="true"></span> Details <small>Open-Banking ChatBot Survey</small></h1>
+        </div>
+      </div>
+    </div>
+
+{%  endblock  %}
+
+{%  block breadcrumb  %}
+      <div class="container">
+        <ol class="breadcrumb">
+          <li><a href="{% url 'home:dashboard'  %}">Dashboard</a></li>
+          <li class="active">Poll-Details</li>
+        </ol>
+      </div>
+{%  endblock  %}
+
+{%  block main  %}
+
+ <div class="panel panel-default">
+    <div class="panel-heading main-color-bg">
+      <h3 class="panel-title">Poll-Details</h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12">
+            {%  if messages %}
+                {%  for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{ message.tags }} alert-dismissible"{% endif %} role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    {{  message  }}
+                </div>
+                {%  endfor %}
+              {%  endif %} 
+
+            <p><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> {{poll}} - <span class="badge">{{poll.num_opinion}}</span> Opinion(s)</p>
+
+            <form action="{% url 'polls:opinion' poll.id %}" method="post">
+            {% csrf_token %}
+
+            {% for choice in poll.choice_set.all %}
+
+              <input type="radio"
+                     name="choice"
+                     id="choice{{ forloop.counter }}"
+                     value="{{choice.id}}"/>
+              <label for="choice{{ forloop.counter }}">{{ choice.choice_text }} - <span class="badge">{{ choice.num_opinion }}</span></label>
+              <br/>
+
+            {% endfor %}
+            <input class='btn btn-primary mb-2' type="submit" value="Vote" {% if not user_give_opinion %}disabled{% endif %}/>
+
+            </form>
+
+            {% if not user_give_opinion %}
+
+                {% for choice_dict in results %}
+                <div class="row">
+                    <div class="col-sm-6">
+                    {{choice_dict.text}}
+                    <div class="progress mb-1">
+                      <div class="progress-bar" role="progressbar" style="width: {{choice_dict.percentage}}%;">{{choice_dict.num_opinion}}</div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+
+            {% else %}
+              <p>Vote to see results!</p>
+            {% endif %}
+
+        </div>
+      </div>
+      <br>
+      
+    </div>
+  </div>
+{% endblock %}

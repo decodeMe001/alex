@@ -1,0 +1,25 @@
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">AlexChatBanking</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        {% with url_name=request.resolver_match.url_name %}
+        <li class="{% if url_name == 'dashboard' %}active{% endif %}"><a href="{% url 'home:dashboard' %}">Dashboard</a></li>
+        <li class="{% if url_name == 'polls' %}active{% endif %}"><a href="{% url 'home:polls' %}">Polls</a></li>
+        <li class="{% if url_name == 'detail' %}active{% endif %}"><a href="{% url 'home:polls' %}">Detail</a></li>
+        {% endwith %}
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'home:dashboard' %}">Welcome, {{ get_user.username }}</a></li>
+        {% if request.user.is_authenticated %}
+        	<li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+      	{% endif %}
+      </ul>
+    </div><!--/.nav-collapse -->
