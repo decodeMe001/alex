@@ -1,0 +1,38 @@
+{%  extends 'account/base_account.html' %}
+
+{%  block content %}
+
+<div class="form">
+	<section class="login_content">
+		<form action="" method="post">
+			{% csrf_token %}
+	      	<h1>Create Account</h1>
+				     {% for field in form %}
+		              {{ field.errors }}
+		              {{ field }}
+	          	{% endfor %}
+
+			<div class="row">
+				<div class="col-md-6">
+					<input type="checkbox" class="checkbox" checked required>
+					<a href="#">Terms and Conditions</a>
+				</div>
+				<div class="col-md-6">
+					<input type="submit" value="Register" class="btn btn-md btn-primary pull-right">
+				</div>
+
+			</div>
+
+	          <div class="clearfix"></div>
+	          <div class="separator">
+	            <p>Already have an account? <a href="{% url 'accounts:login' %}">Login here!</a></p>
+	            	<div class="clearfix"></div><br /><br/>
+		          <div>
+								<p>Copyright LeadSolutionTech &copy; 2020</p>
+		          </div>
+	          </div>
+		</form>
+	</section>
+</div>
+
+{%	endblock %}

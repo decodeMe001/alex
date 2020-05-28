@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path, include
 
 from . import views
 
@@ -10,6 +10,5 @@ urlpatterns = [
     path('chat/', include('alexchat.urls', namespace='roomchat')),
     path('api/', include('bankbranch.urls')),
     path('access/alex-d-chatbot/admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls'))
 ]
-
-

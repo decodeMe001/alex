@@ -21,7 +21,7 @@ def user_login(request):
 	       	return	redirect(redirect_url)
 	    else:
 	    	messages.error(request, 'Invalid credentials supplied.')
-	return render(request,'login.html', {})
+	return render(request,'account/login.html', {})
 
 def logout_user(request):
     logout(request)
@@ -41,6 +41,4 @@ def user_registration(request):
 	else:
 		form = UserRegistrationForm()
 
-	return render(request, 'register.html', {'form': form})
-
-	       
+	return render(request, 'account/register.html', {'form': form})

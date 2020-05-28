@@ -12,4 +12,5 @@ class BankBranch(models.Model):
 	def __str__(self):
 		return self.bank.capitalize() + "-" + self.address
 
-
+	class Meta:
+		verbose_name_plural = 'branches'

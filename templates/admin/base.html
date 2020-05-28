@@ -1,27 +1,6 @@
 {% extends "admin/base.html" %}
-{% load admin_static %}
 
-
-<!-- Additional CSS includes
-{% block extrastyle %}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/my_project.css' %}" media="all">
-{% endblock %} -->
-
-
- <!-- Additional JS files in footer, right before </body>
-{% block extrajs %}
-  <script type="text/javascript" src="{% static 'js/my_project.js' %}"></script>
-{% endblock %} -->
-
-
-<!-- Footer links (left side)
-{% block footer_links %}
-  <a href="/docs/" class="icon"><i class="icon-question-sign"></i>Documentation</a>
-{% endblock %} -->
-
-<!-- Additional header content like notifications or language switcher -->
 {% block header_content %}
-    {{ block super }}
     <div class="header-content" style="margin-top: 5px;">
         <!--First icon column-->
         <div class="header-column icon">
@@ -29,7 +8,7 @@
             <!--<i class="icon-cog"></i>-->
         </div>
         <div class="header-column">
-            <a href="/" class="grey">Home</a><br>
+            <a href="" class="grey">Home</a><br>
             <!--<a href="" class="grey">One more link</a>-->
         </div>
         <!-- Second icon column
